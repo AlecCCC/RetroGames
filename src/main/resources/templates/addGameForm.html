@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+
+<form th:action="@{/retrogames/addGameForm}" method="post" th:object="${game}">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Title:</label>
+    <input type="text" th:field="*{title}" required/>
+
+    <label>Price:</label>
+    <input type="number" th:field="*{price}"/>
+
+    <label>Release Date:</label>
+    <input type="date" th:field="*{release_date}" />
+
+    <label>Quantity:</label>
+    <input type="number" th:field="*{qty}"/>
+
+    <label>Rating:</label>
+    <input type="text" th:field="*{esrb_rating}"/>
+
+    <label>Platform:</label>
+    <input type="text" th:field="*{platform}"/>
+
+    <label>Photo URL:</label>
+    <input type="text" th:field="*{picture_url}"/>
+
+    <button type="submit">Update Game</button>
+</form>
+
+</body>
+</html>
