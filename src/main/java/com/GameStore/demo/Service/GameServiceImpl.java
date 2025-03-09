@@ -35,8 +35,8 @@ public class GameServiceImpl implements GameService {
             theGame = result.get();
         }
         else {
-            // we didn't find the employee
-            throw new RuntimeException("Did not find employee id - " + theId);
+            // we didn't find the game
+            throw new RuntimeException("Did not find game id - " + theId);
         }
 
         return theGame;

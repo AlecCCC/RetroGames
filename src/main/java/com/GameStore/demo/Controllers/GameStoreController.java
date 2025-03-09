@@ -89,6 +89,13 @@ public class GameStoreController {
         return "redirect:/retrogames/list-games";
     }
 
+    @GetMapping("/error/{id}")
+    public String error(@PathVariable("id") long gameId, Model model){
+        System.out.printf("Could not find game with id of %d ", gameId);
+        model.addAttribute("gameId",gameId);
+        return "error";
+    }
+
 
 }
 

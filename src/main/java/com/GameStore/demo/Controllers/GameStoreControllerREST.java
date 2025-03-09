@@ -32,7 +32,7 @@ public class GameStoreControllerREST {
         Game theGame = gameService.findById(gameId);
 
         if (theGame == null) {
-            throw new RuntimeException("Employee id not found - " + gameId);
+            throw new RuntimeException("Game id not found - " + gameId);
         }
 
         return theGame;
