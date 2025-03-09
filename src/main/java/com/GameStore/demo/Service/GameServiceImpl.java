@@ -3,6 +3,7 @@ package com.GameStore.demo.Service;
 import com.GameStore.demo.Games.Game;
 import com.GameStore.demo.dao.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +21,9 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<Game> findAll() {
-//        return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "title"));
-        return gameRepository.findAll();
+//        return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "esrb"));
+
+        return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     public Game findById(Long theId) {

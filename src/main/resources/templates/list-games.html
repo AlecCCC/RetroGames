@@ -8,11 +8,18 @@
 </head>
 <body>
 
+<header class="d-flex justify-content-around align-items-center">
+    <h3>Retro Games</h3>
+    <a th:href="@{/retrogames/addGameForm}">Add Game</a>
+</header>
+<hr>
+
 <div class="container mt-4">
     <h2 class="text-center mb-4">Available Games</h2>
     <div class="row">
         <!-- Loop through games -->
         <div class="col-md-4 mb-4" th:each="game : ${games}">
+            <a class="game-card-link" th:href="@{/retrogames/game/{id}(id=${game.id})}">
             <div class="game-card p-3">
                 <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
                     <img th:src="${game.picture_url}" class="game-image" th:alt="${game.title}">
@@ -20,26 +27,12 @@
 
                 <div class="mt-2">
                     <p class="game-title" th:text="${game.title}"></p>
-                    <p><strong>ESRB:</strong> <span th:text="${game.esrb_rating}"></span></p>
                     <p><strong>Platform:</strong> <span th:text="${game.platform}"></span></p>
-                    <p><strong>Release Date:</strong> <span th:text="${#dates.format(game.release_date, 'MM-dd-yyyy')}"></span></p>
                     <p class="price">$<span th:text="${#numbers.formatDecimal(game.price, 1, 2)}"></span></p>
-                    <p><strong>Stock:</strong> <span th:text="${game.qty}"></span></p>
-                    <div class="options d-flex justify-content-between">
-<!--                        <button type="button" class="btn btn-primary">Add To Cart</button>-->
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                Options
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" th:href="@{/retrogames/edit/{id}(id=${game.id})}">Edit</a></li>
-                                <li><a class="dropdown-item" th:href="@{/retrogames/delete/{id}(id=${game.id})}" onclick="return confirm('Are you sure you want to delete this game?');">Delete</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
                 </div>
             </div>
+            </a>
+
         </div>
     </div>
 </div>

@@ -29,13 +29,13 @@ public class GameStoreControllerREST {
     @GetMapping("/games/{gameId}")
     public Game getGame(@PathVariable Long gameId) {
 
-        Game theEmployee = gameService.findById(gameId);
+        Game theGame = gameService.findById(gameId);
 
-        if (theEmployee == null) {
+        if (theGame == null) {
             throw new RuntimeException("Employee id not found - " + gameId);
         }
 
-        return theEmployee;
+        return theGame;
     }
 
 }

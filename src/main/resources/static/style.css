@@ -1,7 +1,12 @@
 
+.game-card-link{
+    text-decoration: none;
+    color: inherit;
+}
+
 .game-card {
     background-color: #ffffff;
-    min-height: 500px;
+    min-height: 300px;
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;

@@ -25,14 +25,19 @@ public class GameStoreController {
         return "list-games";
     }
 
-    //Home Page
-    @GetMapping("/home")
-    public String homePage(){
+    @GetMapping("/game/{id}")
+    public String getGame(@PathVariable("id") long theId, Model model){
 
-        return "home";
+        Game theGame = gameService.findById(theId);
+
+        if (theGame == null){
+            System.out.println("Game was not found");
+        }
+
+        model.addAttribute("game", theGame);
+
+        return "game";
     }
-
-
 
 
     //Add Game Form GET
@@ -53,7 +58,7 @@ public class GameStoreController {
         }
 
         gameService.save(game);
-        return "redirect:/retrogames/home";
+        return "redirect:/retrogames/list-games";
    }
 
    //delete game
@@ -74,10 +79,10 @@ public class GameStoreController {
       }
 
       model.addAttribute("game", theGame);
-      return "addGameForm";
+      return "editGameForm";
   }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/edit/{id}")
     public String updateGame(@PathVariable("id") long gameId, @ModelAttribute("game") Game updatedGame) {
         updatedGame.setId(gameId);
         gameService.save(updatedGame);

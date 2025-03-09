@@ -14,7 +14,8 @@ public class Game {
     private long id;
     @Column(name = "title", nullable = false)
     private String title;
-    private String esrb_rating;
+    @Column(name = "esrb_rating")
+    private String esrb;
     private float price;
     private String platform;
     private int qty;
@@ -28,7 +29,7 @@ public class Game {
 
     public Game(String title, String esrb_rating, float price, String platform, int qty, Date release_date, String picture_url) {
         this.title = title;
-        this.esrb_rating = esrb_rating;
+        this.esrb = esrb_rating;
         this.price = price;
         this.platform = platform;
         this.qty = qty;
@@ -53,11 +54,11 @@ public class Game {
     }
 
     public String getEsrb_rating() {
-        return esrb_rating;
+        return esrb;
     }
 
     public void setEsrb_rating(String esrb_rating) {
-        this.esrb_rating = esrb_rating;
+        this.esrb = esrb_rating;
     }
 
     public float getPrice() {
@@ -105,7 +106,7 @@ public class Game {
         return "Game{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", esrb_rating='" + esrb_rating + '\'' +
+                ", esrb_rating='" + esrb + '\'' +
                 ", price=" + price +
                 ", platform='" + platform + '\'' +
                 ", qty=" + qty +

@@ -8,10 +8,11 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
 <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
-    <h2 class="text-2xl font-bold mb-4 text-center">Add or Update Game</h2>
+    <h2 class="text-2xl font-bold mb-4 text-center">Update Game</h2>
+    <p>Platform: <span th:text="${game.platform}"></span></p>
 
-    <form th:action="@{/retrogames/addGameForm}" method="post" th:object="${game}" class="space-y-4">
-        <input type="hidden" th:field="*{id}" />
+
+    <form th:action="@{/retrogames/edit/{id}(id=${game.id})}" method="post" th:object="${game}" class="space-y-4">
 
         <div>
             <label class="block text-gray-700">Title:</label>
@@ -41,13 +42,13 @@
         <div>
             <label class="block text-gray-700">Platform:</label>
             <select th:field="*{platform}" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
-                <option value="" disabled selected>Select a Platform</option>
-                <option value="PC">PC</option>
-                <option value="Xbox">Xbox</option>
-                <option value="PlayStation 1">PlayStation 1</option>
-                <option value="Nintendo">Nintendo</option>
-                <option value="Switch">Switch</option>
-                <option value="Mobile">Mobile</option>
+                <option value="" disabled>Select a Platform</option>
+                <option th:value="'PC'" th:selected="${game.platform == 'PC'}">PC</option>
+                <option th:value="'Xbox'" th:selected="${game.platform == 'Xbox'}">Xbox</option>
+                <option th:value="'Playstation 1'" th:selected="${game.platform == 'Playstation 1'}">Playstation 1</option>
+                <option th:value="'Nintendo'" th:selected="${game.platform == 'Nintendo'}">Nintendo</option>
+                <option th:value="'Switch'" th:selected="${game.platform == 'Switch'}">Switch</option>
+                <option th:value="'Mobile'" th:selected="${game.platform == 'Mobile'}">Mobile</option>
             </select>
         </div>
 
