@@ -19,9 +19,17 @@ public class GameStoreController {
 
 
     @GetMapping("/list-games")
-    public String listGames(Model model) {
-        List<Game> games = gameService.findAll();
+    public String listGames(Model model, @RequestParam(required = false) String search) {
+        List<Game> games;
+        if (search != null && !search.isEmpty()) {
+            // Search for games by title if a search term is provided
+            games = gameService.findByTitleContaining(search);
+        } else {
+            // Otherwise, display all games
+            games = gameService.findAll();
+        }
         model.addAttribute("games", games);
+        model.addAttribute("search", search);  // Add the search term back to the model to retain it in the search bar
         return "list-games";
     }
 

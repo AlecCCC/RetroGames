@@ -9,8 +9,9 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
 <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
     <h2 class="text-2xl font-bold mb-4 text-center">Update Game</h2>
-    <p>Platform: <span th:text="${game.platform}"></span></p>
-
+    <a class="link text-center" style="color: dodgerblue" th:href="@{/retrogames/list-games}">
+        <h4>Back To Home</h4>
+    </a>
 
     <form th:action="@{/retrogames/edit/{id}(id=${game.id})}" method="post" th:object="${game}" class="space-y-4">
 

@@ -13,7 +13,11 @@
 <body>
 
 <div class="container mt-5">
+
     <h2 th:text="${game.title}" class="text-center"></h2>
+    <a class="text-center" style="text-decoration: none" th:href="@{/retrogames/list-games}">
+        <h4>Back To Home</h4>
+    </a>
 
     <div class="d-flex justify-content-center">
         <img th:src="${game.picture_url}" class="img-fluid rounded shadow-sm" th:alt="${game.title}" style="max-width: 300px;">

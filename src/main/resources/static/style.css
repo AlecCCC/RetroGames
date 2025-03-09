@@ -4,6 +4,46 @@
     color: inherit;
 }
 
+@font-face {
+    font-family: 'TechnoFont';
+    src: url('../static/Fonts/ShareTechMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+header{
+    height: 80px;
+    background-color: #ffffff;
+    color: #000000;
+    border-bottom: 1px solid black;
+}
+
+.link {
+    align-content: center;
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #000000;
+    font-family: TechnoFont;
+    position: relative;
+    background-color: transparent;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    height: 100%;
+}
+
+.link:hover {
+    background-color: #e4e4e4; /* Change to any highlight color */
+}
+
+.link:hover::after {
+    width: 100%;
+}
+
+.company-name{
+    font-family: TechnoFont;
+    letter-spacing: 2mm;
+}
+
 .game-card {
     background-color: #ffffff;
     min-height: 300px;

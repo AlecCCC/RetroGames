@@ -22,13 +22,11 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<Game> findAll() {
 //        return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "esrb"));
-
         return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     public Game findById(Long theId) {
         Optional<Game> result = gameRepository.findById(theId);
-
         Game theGame = null;
 
         if (result.isPresent()) {
@@ -50,6 +48,11 @@ public class GameServiceImpl implements GameService {
     @Override
     public void deleteById(long theId) {
         gameRepository.deleteById(theId);
+    }
+
+    @Override
+    public List<Game> findByTitleContaining(String title) {
+        return gameRepository.findByTitleContainingIgnoreCase(title);
     }
 
 

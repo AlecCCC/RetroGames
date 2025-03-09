@@ -14,4 +14,6 @@ public interface GameService {
 
     void deleteById(long theId);
 
+    List<Game> findByTitleContaining(String title);
+
 }
