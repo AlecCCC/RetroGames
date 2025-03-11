@@ -55,10 +55,28 @@ header{
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.kebab-menu {
-    height: 35px;
-    float: right;
+.forms {
+
 }
+
+.search-title {
+    width: 300px;
+}
+
+.esrb-search {
+    width: 200px;
+    margin-left: 25px;
+}
+
+.sort-price{
+    width: 300px;
+    margin-left: 25px;
+}
+
+.forms {
+    display: flex;
+}
+
 
 .game-image {
     width: 100%;

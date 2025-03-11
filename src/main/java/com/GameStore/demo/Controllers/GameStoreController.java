@@ -19,19 +19,39 @@ public class GameStoreController {
 
 
     @GetMapping("/list-games")
-    public String listGames(Model model, @RequestParam(required = false) String search) {
+    public String listGames(Model model,
+                            @RequestParam(required = false) String search,
+                            @RequestParam(required = false) String esrb,
+                            @RequestParam(required = false, defaultValue = "") String sortOrder) { // Default to empty for title sorting
+
         List<Game> games;
-        if (search != null && !search.isEmpty()) {
-            // Search for games by title if a search term is provided
-            games = gameService.findByTitleContaining(search);
+
+        // Apply search or filter first
+        if ((search != null && !search.isEmpty()) || (esrb != null && !esrb.isEmpty())) {
+            games = gameService.filterGames(search, esrb);
         } else {
-            // Otherwise, display all games
-            games = gameService.findAll();
+
+            // If no sortOrder or invalid, sort by title
+            if (sortOrder.isEmpty()) {
+                games = gameService.findAllSortedByTitle();
+            } else if ("asc".equalsIgnoreCase(sortOrder) || "desc".equalsIgnoreCase(sortOrder)) {
+
+                games = gameService.findAllSortedByPrice(sortOrder);
+
+            } else {
+                games = gameService.findAllSortedByTitle();
+            }
         }
+
         model.addAttribute("games", games);
-        model.addAttribute("search", search);  // Add the search term back to the model to retain it in the search bar
+        model.addAttribute("game-title", search);
+        model.addAttribute("esrb", esrb);
+        model.addAttribute("sortOrder", sortOrder);  // Add sortOrder to the model for UI
+
         return "list-games";
     }
+
+
 
     @GetMapping("/game/{id}")
     public String getGame(@PathVariable("id") long theId, Model model){

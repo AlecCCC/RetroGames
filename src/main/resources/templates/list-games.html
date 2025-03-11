@@ -10,32 +10,57 @@
 
 <div th:replace="fragments/header :: header"></div>
 
-
 <div class="container mt-4">
-    <form action="/retrogames/list-games" method="get" class="mb-4">
-        <div class="input-group">
-            <input type="text" name="search" class="form-control" placeholder="Search for a game by title" th:value="${search}">
-            <button class="btn btn-primary" type="submit">Search</button>
-        </div>
-    </form>
+    <div class="">
+        <form action="/retrogames/list-games" method="get" class="mb-4 forms">
+            <div class="input-group mb-3 search-title">
+                <input type="text" name="search" class="form-control" placeholder="Search for a game by title" th:value="${search}">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+
+            <div class="input-group mb-3 esrb-search">
+                <label class="input-group-text " for="esrbSelect">ESRB</label>
+                <select class="form-select" id="esrbSelect" name="esrb">
+                    <option value="">All Ratings</option>
+                    <option value="E" th:selected="${esrb == 'E'}">E - Everyone</option>
+                    <option value="T" th:selected="${esrb == 'T'}">T - Teen</option>
+                    <option value="M" th:selected="${esrb == 'M'}">M - Mature</option>
+                </select>
+            </div>
+
+            <!-- Price Sort Dropdown -->
+            <div class="input-group mb-3 sort-price">
+                <label class="input-group-text" for="sortSelect">Sort By Price</label>
+                <select class="form-select" id="sortSelect" name="sortOrder">
+                    <option value="asc" th:selected="${sortOrder == 'asc'}">Price: Low to High</option>
+                    <option value="desc" th:selected="${sortOrder == 'desc'}">Price: High to Low</option>
+                </select>
+            </div>
+
+            <a class="text-center mb-3" style="color: dodgerblue; text-decoration: none; align-self: center; margin-left: 25px" th:href="@{/retrogames/list-games}">
+                Clear
+            </a>
+        </form>
+    </div>
+
     <h2 class="text-center mb-4">Available Games</h2>
     <div class="row">
         <!-- Loop through games -->
         <div class="col-md-4 mb-4" th:each="game : ${games}">
             <a class="game-card-link" th:href="@{/retrogames/game/{id}(id=${game.id})}">
-            <div class="game-card p-3">
-                <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
-                    <img th:src="${game.picture_url}" class="game-image" th:alt="${game.title}">
-                </div>
+                <div class="game-card p-3">
+                    <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                        <img th:src="${game.picture_url}" class="game-image" th:alt="${game.title}">
+                    </div>
 
-                <div class="mt-2">
-                    <p class="game-title" th:text="${game.title}"></p>
-                    <p><strong>Platform:</strong> <span th:text="${game.platform}"></span></p>
-                    <p class="price">$<span th:text="${#numbers.formatDecimal(game.price, 1, 2)}"></span></p>
+                    <div class="mt-2">
+                        <p class="game-title" th:text="${game.title}"></p>
+                        <p><strong>Platform:</strong> <span th:text="${game.platform}"></span></p>
+                        <p><strong>ESRB Rating:</strong> <span th:text="${game.esrb_rating}"></span></p>
+                        <p class="price">$<span th:text="${#numbers.formatDecimal(game.price, 1, 2)}"></span></p>
+                    </div>
                 </div>
-            </div>
             </a>
-
         </div>
     </div>
 </div>

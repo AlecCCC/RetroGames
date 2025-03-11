@@ -12,48 +12,60 @@ import java.util.Optional;
 @Service
 public class GameServiceImpl implements GameService {
 
-    private GameRepository gameRepository;
-
     @Autowired
-    public GameServiceImpl(GameRepository gameRepository) {
-        this.gameRepository = gameRepository;
-    }
+    private GameRepository gameRepository;
 
     @Override
     public List<Game> findAll() {
-//        return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "esrb"));
-        return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "title"));
+
+//        return gameRepository.findAll();
     }
 
-    public Game findById(Long theId) {
-        Optional<Game> result = gameRepository.findById(theId);
-        Game theGame = null;
+    @Override
+    public Game findById(long id) {
+        Optional<Game> result = gameRepository.findById(id);
+        return result.orElse(null);
+    }
 
-        if (result.isPresent()) {
-            theGame = result.get();
+
+    @Override
+    public List<Game> filterGames(String title, String esrb) {
+        if (title != null && !title.isEmpty() && esrb != null && !esrb.isEmpty()) {
+            return gameRepository.findByTitleContainingIgnoreCaseAndEsrbIgnoreCase(title, esrb);
+
+        } else if (title != null && !title.isEmpty()) {
+            return gameRepository.findByTitleContainingIgnoreCase(title);
+
+        } else if (esrb != null && !esrb.isEmpty()) {
+            return gameRepository.findByEsrbIgnoreCase(esrb);
+
+        } else {
+            return gameRepository.findAll();
         }
-        else {
-            // we didn't find the game
-            throw new RuntimeException("Did not find game id - " + theId);
+    }
+
+    @Override
+    public List<Game> findAllSortedByPrice(String sortOrder) {
+        if ("desc".equalsIgnoreCase(sortOrder)) {
+            return gameRepository.findAll(Sort.by(Sort.Direction.DESC, "price"));
+        } else {
+            return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "price"));
         }
-
-        return theGame;
     }
 
     @Override
-    public Game save(Game game) {
-        return gameRepository.save(game);
+    public List<Game> findAllSortedByTitle() {
+        return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "title"));
     }
 
     @Override
-    public void deleteById(long theId) {
-        gameRepository.deleteById(theId);
+    public void save(Game game) {
+        gameRepository.save(game);
     }
 
     @Override
-    public List<Game> findByTitleContaining(String title) {
-        return gameRepository.findByTitleContainingIgnoreCase(title);
+    public void deleteById(long id) {
+        gameRepository.deleteById(id);
     }
-
-
 }
