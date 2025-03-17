@@ -16,4 +16,8 @@ public interface GameService {
 
     List<Game> findByTitleContaining(String title);
 
+    List<Game> findByEsrbRating(String esrb);
+
+    List<Game> findByEsrbRatingAndTitle(String esrb, String title);
+
 }

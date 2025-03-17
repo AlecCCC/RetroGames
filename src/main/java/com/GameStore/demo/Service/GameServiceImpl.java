@@ -55,5 +55,15 @@ public class GameServiceImpl implements GameService {
         return gameRepository.findByTitleContainingIgnoreCase(title);
     }
 
+    @Override
+    public List<Game> findByEsrbRating(String esrb) {
+        return gameRepository.findByEsrb(esrb);
+    }
+
+    @Override
+    public List<Game> findByEsrbRatingAndTitle(String esrb, String title) {
+        return gameRepository.findByEsrbAndTitleContainingIgnoreCase(esrb, title);
+    }
+
 
 }

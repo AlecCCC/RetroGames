@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface GameRepository extends JpaRepository<Game, Long> {
     List<Game> findByTitleContainingIgnoreCase(String title);
+
+    List<Game> findByEsrb(String esrb);
+
+    List<Game> findByEsrbAndTitleContainingIgnoreCase(String esrb, String title);
 }

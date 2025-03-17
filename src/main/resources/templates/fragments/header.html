@@ -1,5 +1,8 @@
 <header class="d-flex justify-content-around align-items-center">
-    <h3 class="company-name">Retro Games</h3>
+    <a class="company-name-link" th:href="@{/retrogames/list-games}">
+        <h3 class="company-name">Retro Games</h3>
+    </a>
+
     <a class="link" th:href="@{/retrogames/addGameForm}">
         <h4>Add Game</h4>
     </a>

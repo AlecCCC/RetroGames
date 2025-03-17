@@ -4,6 +4,28 @@
     color: inherit;
 }
 
+.search-title{
+    width: 300px;
+}
+
+.esrb-label {
+    margin-right: 10px;
+}
+
+.esrb-filter {
+    display: flex;
+    align-items: center;
+}
+
+#esrb{
+   width: 200px;
+}
+
+.company-name-link {
+    text-decoration: none;
+    color: inherit;
+}
+
 @font-face {
     font-family: 'TechnoFont';
     src: url('../static/Fonts/ShareTechMono-Regular.ttf') format('truetype');

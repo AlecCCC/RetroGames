@@ -12,6 +12,7 @@
 
 <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
     <h2 class="text-2xl font-bold mb-4 text-center">Add Game</h2>
+
     <a class="link text-center" style="color: dodgerblue" th:href="@{/retrogames/list-games}">
         <h4>Back To Home</h4>
     </a>
@@ -21,7 +22,7 @@
 
         <div>
             <label class="block text-gray-700">Title:</label>
-            <input type="text" th:field="*{title}" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"/>
+            <input type="text" th:field="${title}" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"/>
         </div>
 
         <div>

@@ -19,17 +19,30 @@ public class GameStoreController {
 
 
     @GetMapping("/list-games")
-    public String listGames(Model model, @RequestParam(required = false) String search) {
+    public String listGames(Model model,
+                            @RequestParam(required = false) String search,
+                            @RequestParam(required = false) String esrb) {
         List<Game> games;
-        if (search != null && !search.isEmpty()) {
-            // Search for games by title if a search term is provided
+
+        if (search != null && !search.isEmpty() && esrb != null && !esrb.isEmpty()) {
+            // If both search and ESRB are provided, filter by both
+            games = gameService.findByEsrbRatingAndTitle(esrb, search);
+        } else if (search != null && !search.isEmpty()) {
+            // If only search is provided, filter by title
             games = gameService.findByTitleContaining(search);
+        } else if (esrb != null && !esrb.isEmpty()) {
+            // If only ESRB is provided, filter by ESRB rating
+            games = gameService.findByEsrbRating(esrb);
         } else {
-            // Otherwise, display all games
+            // If no filters are applied, return all games
             games = gameService.findAll();
         }
+
+
         model.addAttribute("games", games);
-        model.addAttribute("search", search);  // Add the search term back to the model to retain it in the search bar
+        model.addAttribute("search", search);
+        model.addAttribute("esrb", esrb);
+
         return "list-games";
     }
 
